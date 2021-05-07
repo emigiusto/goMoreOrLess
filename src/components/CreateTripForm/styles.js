@@ -8,7 +8,13 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'center',
     },
     formPaper:{
-      padding: '16px'
+      padding: '16px',
+      [theme.breakpoints.up("md")]: {
+        width: "60%",
+      },
+      [theme.breakpoints.up("lg")]: {
+        width: "40%",
+      },
     },
     button:{
       marginTop: '16px',

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 //Components
-import CreateTripForm from './components/CreateTripForm/CreateTripForm2';
+import CreateTripForm from './components/CreateTripForm/CreateTripForm';
 import SearchTrip from './components/SearchTrip/SearchTrip';
 
 //Routing
