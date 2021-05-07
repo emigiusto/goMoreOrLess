@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+//Components
+import CreateTripForm from './components/CreateTripForm/CreateTripForm2';
+import SearchTrip from './components/SearchTrip/SearchTrip';
+
+//Routing
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+//Data managment
+import firebase from './firebase'
 
 function App() {
+  const [trips, setTrips] = useState([]);
+
+  useEffect(() => {
+    fetchTrips();
+  }, []);
+
+  
+  const fetchTrips = async () => {
+    firebase 
+      .firestore()
+      .collection('trips')
+      .onSnapshot(serverUpdate => {
+          const updatedTrips = serverUpdate.docs.map(_doc =>{
+            const data = _doc.data();
+            data['id'] = _doc.id;
+            return data
+          });
+          setTrips(updatedTrips)
+      }); 
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <SearchTrip trips={trips}></SearchTrip>
+        </Route>
+        <Route exact path="/createtrip" >
+          <CreateTripForm></CreateTripForm>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
