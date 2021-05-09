@@ -21,6 +21,7 @@ function App() {
     firebase 
       .firestore()
       .collection('trips')
+      //Subscribes to changes on trips firebase collection
       .onSnapshot(serverUpdate => {
           const updatedTrips = serverUpdate.docs.map(_doc =>{
             const data = _doc.data();

@@ -6,10 +6,11 @@ import {Typography} from '@material-ui/core';
 //Components
 import TripCard from './TripCard/TripCard'
 import SearchBar from './SearchBar/SearchBar'
+
 //Stylesheet
 import useStyles from './styles'
 
-//Auxiliar Functions
+//Other Libraries
 import moment from 'moment'
 
 function SearchTrip({trips}) {
@@ -23,7 +24,7 @@ function SearchTrip({trips}) {
     const [toDate, setToDate] = useState(moment(new Date()).add(1, 'year').format('YYYY-MM-DD'));
     const [seatsNumber, setSeatsNumber] = useState(2);
 
-    //Search Form control functions
+    //Search Form handling functions
     const handleFromCity = (event) => {
       setFromCity(event.target.value);
     };
@@ -42,8 +43,7 @@ function SearchTrip({trips}) {
 
     const filterTrips = (searchParams) => {
         var newTripList = trips.filter((trip)=> 
-            (
-                (searchParams.fromCity === 'All' ? true : trip.fromCity === searchParams.fromCity) &&
+            (   (searchParams.fromCity === 'All' ? true : trip.fromCity === searchParams.fromCity) &&
                 (searchParams.toCity === 'All' ? true : trip.toCity === searchParams.toCity) &&
                 moment(trip.tripDate).isSameOrAfter(searchParams.fromDate, 'day') &&
                 moment(trip.tripDate).isSameOrBefore(searchParams.toDate, 'day') &&
@@ -51,7 +51,8 @@ function SearchTrip({trips}) {
             ))
         setTripsFiltered(newTripList)
       };
-    
+      
+      //Everytime trips is updated from firebase or search parameters change from the user, re-renders the component filtering the array received
       useEffect(() => {
         filterTrips({
           fromCity: fromCity,
@@ -60,8 +61,7 @@ function SearchTrip({trips}) {
           toDate: toDate,
           seatsNumber: seatsNumber
         })
-      }, [trips]);
-
+      }, [trips,fromCity,toCity,fromDate,toDate,seatsNumber]);
 
     return (
         <div className={classes.container}>
@@ -81,8 +81,6 @@ function SearchTrip({trips}) {
             <div className={classes.cardDeck}>
                 {tripsFiltered.map(trip => {return <TripCard key={trip.id} trip={trip}></TripCard>})}
             </div>
-            
-            
         </div>
     );
 }

@@ -3,7 +3,6 @@ import React from 'react';
 //Material UI
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 
 //Data
 import cities from '../../../data'
@@ -11,12 +10,12 @@ import cities from '../../../data'
 //Stylesheet
 import useStyles from './styles.js'
 
+//Component containing search inputs on top
 const SearchBar = ({fromCity,
                     toCity,
                     fromDate,
                     toDate,
                     seatsNumber,
-                    handleSearch,
                     handleFromCity,
                     handleToCity,
                     handleFromDate,
@@ -24,23 +23,10 @@ const SearchBar = ({fromCity,
                     handleSeatsNumber}
                   ) => {
   const classes = useStyles();
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    handleSearch(
-      { fromDate: fromDate,
-        toDate: toDate,
-        fromCity: fromCity,
-        toCity: toCity,
-        seatsNumber: seatsNumber
-      }
-    )
-  };
-
   var citiesWithAll = [{value: 'All',code: 'ALL'}, ...cities];
 
   return (
-    <form className={classes.container} onSubmit={handleSubmit}>
+    <form className={classes.container}>
       <TextField
         id="from-date"
         label="From"
@@ -71,7 +57,7 @@ const SearchBar = ({fromCity,
         value={seatsNumber}
         onChange={handleSeatsNumber}
       >
-        {[1,2,3,4,5,6,7,8,9,10,11,12].map((option) => (
+        {[1,2,3,4,5,6,7,8,9,10].map((option) => (
         <MenuItem key={option} value={option}>
             {option}
         </MenuItem>
@@ -106,13 +92,6 @@ const SearchBar = ({fromCity,
         </MenuItem>
         ))}
       </TextField>
-      <Button 
-        type="submit" 
-        variant="contained" 
-        color="primary" 
-        className={classes.button}>
-        Search
-      </Button>
     </form>
   );
 }

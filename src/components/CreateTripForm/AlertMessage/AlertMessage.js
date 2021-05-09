@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
+//Custom Alert bar on the bottom that pops up for 2.5 seconds everytime the message changes
 export default function AlertMessage({message}) {
   const classes = useStyles();
   const [open, setOpen] = useState(false)
@@ -29,7 +29,6 @@ export default function AlertMessage({message}) {
           'aria-describedby': 'message-id',
         }}
         message={<span id="message-id"> {message} </span>}
-
       />
     </div>
   );
