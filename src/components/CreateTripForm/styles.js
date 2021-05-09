@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     },
     returnOffer:{
       marginTop: '16px',
+    },
+    backButton:{
+      marginTop: '30px'
     }
   }));
 

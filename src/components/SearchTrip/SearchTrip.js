@@ -1,7 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback } from 'react';
 
 //Material Ui
-import {Typography} from '@material-ui/core';
+import {Typography,Button,Divider} from '@material-ui/core';
+
+//React Router
+import { Link } from 'react-router-dom';
 
 //Components
 import TripCard from './TripCard/TripCard'
@@ -41,7 +44,7 @@ function SearchTrip({trips}) {
       setSeatsNumber(event.target.value);
     };
 
-    const filterTrips = (searchParams) => {
+    const filterTrips = useCallback((searchParams)=>{
         var newTripList = trips.filter((trip)=> 
             (   (searchParams.fromCity === 'All' ? true : trip.fromCity === searchParams.fromCity) &&
                 (searchParams.toCity === 'All' ? true : trip.toCity === searchParams.toCity) &&
@@ -50,7 +53,7 @@ function SearchTrip({trips}) {
                 (trip.seatsNumber >= searchParams.seatsNumber)
             ))
         setTripsFiltered(newTripList)
-      };
+      },[trips])
       
       //Everytime trips is updated from firebase or search parameters change from the user, re-renders the component filtering the array received
       useEffect(() => {
@@ -61,7 +64,7 @@ function SearchTrip({trips}) {
           toDate: toDate,
           seatsNumber: seatsNumber
         })
-      }, [trips,fromCity,toCity,fromDate,toDate,seatsNumber]);
+      }, [trips,fromCity,toCity,fromDate,toDate,seatsNumber,filterTrips]);
 
     return (
         <div className={classes.container}>
@@ -81,6 +84,8 @@ function SearchTrip({trips}) {
             <div className={classes.cardDeck}>
                 {tripsFiltered.map(trip => {return <TripCard key={trip.id} trip={trip}></TripCard>})}
             </div>
+            <Divider variant="middle" className={classes.divider}/>
+            <Button className={classes.backButton} color="secondary" component={Link} variant="contained" to="/createtrip">Create Trip</Button>
         </div>
     );
 }

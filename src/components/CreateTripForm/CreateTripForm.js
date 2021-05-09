@@ -3,6 +3,9 @@ import React, {useState} from 'react';
 //React-hook-form
 import { useForm, FormProvider } from 'react-hook-form';
 
+//React Router
+import { Link } from 'react-router-dom';
+
 //Material UI
 import { InputLabel, Select, MenuItem, Button, Grid, Typography, Paper, TextField, IconButton } from '@material-ui/core';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
@@ -47,7 +50,7 @@ function CreateTripForm(props) {
         };
         var validated = formValidation(tripData)
         if (validated.success) {
-            createNewTrip(newTripInfo)
+            createNewTrip(tripData)
         } else {
             setAlertMessage(validated.error)
         }
@@ -84,7 +87,7 @@ function CreateTripForm(props) {
             <Paper elevation={1} className={classes.formPaper}>
                 <Typography variant="h5" gutterBottom align='center'>Create your trip</Typography>
                 <FormProvider {...methods}>
-                    <form className={classes.form} onSubmit={methods.handleSubmit((newTripInfo, event) => onSubmit(newTripInfo,event))}>
+                    <form className={classes.form} onSubmit={methods.handleSubmit((newTripInfo) => onSubmit(newTripInfo))}>
                         <Grid container spacing={3}>
                             <FormInput required name='firstName' label='First Name'/>
                             <FormInput required name='lastName' label='Last Name'/>
@@ -152,6 +155,7 @@ function CreateTripForm(props) {
                 </FormProvider>
                 {alertMessage ? <AlertMessage message={alertMessage}></AlertMessage> : ''}
             </Paper>
+            <Button className={classes.backButton} component={Link} variant="outlined" to="/">Back to Trips</Button>
         </div>    
     );
 }

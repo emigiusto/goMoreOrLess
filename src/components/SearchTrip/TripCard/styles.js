@@ -2,20 +2,21 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     root: {
-      minWidth: 275,
-      marginBottom: '16px'
-    },
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
+      width: 300,
+      marginRight: '8px',
+      marginLeft: '8px',
+      marginBottom: '16px',
     },
     title: {
       fontSize: 14,
     },
-    pos: {
-      marginBottom: 12,
+    seatsTitle: {
+      marginBottom: '12px',
     },
+    cardActions:{
+      display: 'flex',
+      justifyContent: 'center',
+    }
   });
 
   export default useStyles

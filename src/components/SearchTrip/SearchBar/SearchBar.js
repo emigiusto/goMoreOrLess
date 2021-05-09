@@ -1,8 +1,7 @@
 import React from 'react';
 
 //Material UI
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
+import {TextField,MenuItem,Grid} from '@material-ui/core';
 
 //Data
 import cities from '../../../data'
@@ -27,71 +26,87 @@ const SearchBar = ({fromCity,
 
   return (
     <form className={classes.container}>
-      <TextField
-        id="from-date"
-        label="From"
-        type="date"
-        value={fromDate}
-        className={classes.textField}
-        InputLabelProps={{
-            shrink: true,
-        }}
-        onChange={handleFromDate}
-      />
-      <TextField
-        id="to-date"
-        label="To"
-        type="date"
-        value={toDate}
-        className={classes.textField}
-        InputLabelProps={{
-            shrink: true,
-        }}
-        onChange={handleToDate}
-      />
-      <TextField
-        id="seat-number"
-        className={classes.seatsTextField}
-        select
-        label="Seats"
-        value={seatsNumber}
-        onChange={handleSeatsNumber}
-      >
-        {[1,2,3,4,5,6,7,8,9,10].map((option) => (
-        <MenuItem key={option} value={option}>
-            {option}
-        </MenuItem>
-        ))}
-      </TextField>
-      
-      <TextField
-        id="from-city"
-        className={classes.textField}
-        select
-        label="From City"
-        value={fromCity}
-        onChange={handleFromCity}
-      >
-        {citiesWithAll.map((option) => (
-        <MenuItem key={option.value} value={option.value}>
-            {option.value}
-        </MenuItem>
-        ))}
-      </TextField>
-      <TextField
-        id="to-city"
-        className={classes.textField}
-        select
-        label="To City"
-        value={toCity}
-        onChange={handleToCity}
-      >
-        {citiesWithAll.map((option) => (
-        <MenuItem key={option.value} value={option.value}>
-            {option.value}
-        </MenuItem>
-        ))}
-      </TextField>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} lg={4} container justify="center">
+          <TextField
+            id="from-date"
+            label="From"
+            type="date"
+            fullWidth
+            value={fromDate}
+            className={classes.textField}
+            InputLabelProps={{
+                shrink: true,
+            }}
+            onChange={handleFromDate}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4} container justify="center">
+          <TextField
+            id="to-date"
+            label="To"
+            type="date"
+            value={toDate}
+            fullWidth
+            className={classes.textField}
+            InputLabelProps={{
+                shrink: true,
+            }}
+            onChange={handleToDate}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4} container justify="center">
+          <TextField
+            id="seat-number"
+            className={classes.textField}
+            select
+            fullWidth
+            label="Seats"
+            value={seatsNumber}
+            onChange={handleSeatsNumber}
+          >
+            {[1,2,3,4,5,6,7,8,9,10].map((option) => (
+            <MenuItem key={option} value={option}>
+                {option}
+            </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4} container justify="center">
+          <TextField
+            id="from-city"
+            className={classes.textField}
+            select
+            fullWidth
+            label="From City"
+            value={fromCity}
+            onChange={handleFromCity}
+          >
+            {citiesWithAll.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+                {option.value}
+            </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4} container justify="center">
+          <TextField
+            id="to-city"
+            className={classes.textField}
+            select
+            label="To City"
+            value={toCity}
+            onChange={handleToCity}
+            fullWidth
+          >
+            {citiesWithAll.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+                {option.value}
+            </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+      </Grid>
     </form>
   );
 }

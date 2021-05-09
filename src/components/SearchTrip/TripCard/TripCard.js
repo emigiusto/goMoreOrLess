@@ -18,7 +18,7 @@ export default function TripCard({trip}) {
         <Typography variant="h5" component="h2">
             {trip.fromCity + ' to ' + trip.toCity}
         </Typography>
-        <Typography className={classes.pos} color="textSecondary">
+        <Typography className={classes.seatsTitle} color="textSecondary">
             {trip.seatsNumber + ' seats available'}
         </Typography>
         <Typography variant="h5" color="textSecondary" align="center">
@@ -31,8 +31,8 @@ export default function TripCard({trip}) {
         {trip.returnTrip ? <Typography variant="body" component="p">Return on  + {trip.tripDate}</Typography> : ''}
 
       </CardContent>
-      <CardActions>
-        <Button size="small" variant="contained" color="primary">Book now!</Button>
+      <CardActions className={classes.cardActions}>
+        <Button  size="small" variant="contained" color="primary">Book now!</Button>
       </CardActions>
     </Card>
   );

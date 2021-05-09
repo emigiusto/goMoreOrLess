@@ -14,6 +14,12 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-evenly',
     width: '80%'
+  },
+  backButton:{
+    marginTop: '20px'
+  },
+  divider:{
+    width: '70%'
   }
   }));
 
