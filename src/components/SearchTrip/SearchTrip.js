@@ -82,7 +82,10 @@ function SearchTrip({trips}) {
                         handleSeatsNumber={handleSeatsNumber}
             ></SearchBar>
             <div className={classes.cardDeck}>
-                {tripsFiltered.map(trip => {return <TripCard key={trip.id} trip={trip}></TripCard>})}
+                {tripsFiltered.length>0 ? 
+                      tripsFiltered.map(trip => {return <TripCard key={trip.id} trip={trip}></TripCard>}) 
+                    : <Typography variant="overline" align="center" gutterBottom>No trips match your criteria</Typography>
+                }
             </div>
             <Divider variant="middle" className={classes.divider}/>
             <Button className={classes.backButton} color="secondary" component={Link} variant="contained" to="/createtrip">Create Trip</Button>
