@@ -32,7 +32,6 @@ function SearchTrip({trips}) {
     };
     const handleFromDate = (event) => {
       setFromDate(event.target.value);
-    
     };
     const handleToDate = (event) => {
       setToDate(event.target.value);
@@ -47,14 +46,20 @@ function SearchTrip({trips}) {
                 (searchParams.fromCity === 'All' ? true : trip.fromCity === searchParams.fromCity) &&
                 (searchParams.toCity === 'All' ? true : trip.toCity === searchParams.toCity) &&
                 moment(trip.tripDate).isSameOrAfter(searchParams.fromDate, 'day') &&
-                moment(searchParams.toDate).isSameOrAfter(trip.tripDate, 'day') &&
+                moment(trip.tripDate).isSameOrBefore(searchParams.toDate, 'day') &&
                 (trip.seatsNumber >= searchParams.seatsNumber)
             ))
         setTripsFiltered(newTripList)
       };
     
       useEffect(() => {
-        setTripsFiltered(trips)
+        filterTrips({
+          fromCity: fromCity,
+          toCity: toCity,
+          fromDate: fromDate,
+          toDate: toDate,
+          seatsNumber: seatsNumber
+        })
       }, [trips]);
 
 
